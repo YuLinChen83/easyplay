@@ -1,17 +1,19 @@
-import { connect } from 'react-redux'
-import { addDate } from '../actions'
-import Form from '../components/Form'
+import { connect } from 'react-redux';
+import { inputDate, onFormChange, resultData } from '../actions';
+import Form from '../components/Form';
 
-const mapStateToProps = (state) => ({
-    plandate: state.plandate,
-    names: state.employees
-})
+const mapStateToProps = state => ({
+  plandate: state.plandate,
+  names: state.employees,
+});
 
-const mapDispatchToProps = (dispatch) => ({
-    onSubmit: (addItem) => dispatch(addDate(addItem))
-})
+const mapDispatchToProps = dispatch => ({
+  onFormChange: formData => dispatch(onFormChange(formData)),
+  onSubmit: () => dispatch(inputDate()),
+  onResult: () => dispatch(resultData()),
+});
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
-)(Form)
+  mapDispatchToProps,
+)(Form);

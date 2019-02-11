@@ -2,7 +2,9 @@ const employees = [
     'Tiffany',
     'Sara',
     'Tyler',
-    'Jack'
+    'Jack',
+    'Ben',
+    'Chole'
 ]
 
 const employeesReducer = (state = employees, action) => {
