@@ -4,7 +4,7 @@ const initinalState = {
     preferDate: '',
     unavailableDate: '',
   },
-  visibilityFilter: 'SHOW_ALL', // SHOW_ALL or Employee name
+  visibilityFilter: 'ALL', // ALL or Employee name
   selectlist: [],
   // [
   //   {
@@ -55,36 +55,18 @@ const prepareData = selectlist => selectlist.reduce(
   }),
   { preferDate: [], unavailableDate: [] },
 );
+const strToArr = str => str.split(',').map(item => item.trim());
 const plandate = (state = initinalState, action) => {
   let newSelectlist;
   let objKey;
-  // const { preferDate, unavailableDate } = state.selectlist.reduce(
-  //   (parentPrev, parentCur) => ({
-  //     preferDate: [...parentPrev.preferDate, parentCur.preferDate].reduce(
-  //       (prev, cur) => prev.concat(cur),
-  //       [],
-  //     ),
-  //     unavailableDate: [
-  //       ...new Set(
-  //         [...parentPrev.unavailableDate, parentCur.unavailableDate].reduce(
-  //           (prev, cur) => prev.concat(cur),
-  //           [],
-  //         ),
-  //       ),
-  //     ],
-  //   }),
-  //   { preferDate: [], unavailableDate: [] },
-  // );
-
   let arrPreferDate;
   let arrUnavailableDate;
   let preferDate;
   let unavailableDate;
   switch (action.type) {
     case 'INPUT_DATE':
-      // console.log(state.inputData.preferDate);
-      arrPreferDate = state.inputData.preferDate.split(',');
-      arrUnavailableDate = state.inputData.unavailableDate.split(',');
+      arrPreferDate = strToArr(state.inputData.preferDate);
+      arrUnavailableDate = strToArr(state.inputData.unavailableDate);
       if (
         state.selectlist.map(item => item.name).includes(state.inputData.name)
       ) {
@@ -107,7 +89,6 @@ const plandate = (state = initinalState, action) => {
           },
         ];
       }
-      // const { preferDate, unavailableDate } = prepareData(state.selectlist);
       ({ preferDate, unavailableDate } = prepareData(newSelectlist));
       return {
         ...state,
@@ -126,7 +107,6 @@ const plandate = (state = initinalState, action) => {
         unavailableDates: unavailableDate,
       };
     case 'ON_FORM_CHANGE':
-      // console.log(action.formData);
       objKey = action.formData.name;
       return {
         ...state,
@@ -136,16 +116,21 @@ const plandate = (state = initinalState, action) => {
         },
       };
     case 'SET_VISIBILITY_FILTER':
-      // console.log(`SET_VISIBILITY_FILTER:${action.filter}`);
-      // console.log();
-      console.log(state.selectlist.find(x => x.name === action.filter));
-      ({ preferDate, unavailableDate } = state.selectlist.find(
-        x => x.name === action.filter,
+      newSelectlist = state.selectlist.filter(
+        item => item.name === action.filter,
+      );
+      ({ preferDate, unavailableDate } = prepareData(
+        action.filter === 'ALL' ? state.selectlist : newSelectlist,
       ));
       return {
         ...state,
         visibilityFilter: action.filter,
-        preferDates: preferDate,
+        preferDates: preferDate.reduce((prev2, cur2) => {
+          // eslint-disable-next-line no-param-reassign
+          prev2[cur2] = (prev2[cur2] || 0) + 1;
+          // eslint-enable
+          return prev2;
+        }, {}),
         unavailableDates: unavailableDate,
       };
     case 'RESULT_DATA':

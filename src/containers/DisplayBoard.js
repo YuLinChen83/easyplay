@@ -7,6 +7,7 @@ const mapStateToProps = state => ({
   names: state.employees,
   preferDates: state.plandate.preferDates,
   unavailableDates: state.plandate.unavailableDates,
+  visibilityFilter: state.plandate.visibilityFilter,
 });
 
 const mapDispatchToProps = dispatch => ({
