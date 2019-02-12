@@ -229,9 +229,18 @@ main {
 }
 
 .col.cell.prefer {
-  background-color: yellow;
+  background-color: #fcf2c1;
   color: black;
 }
-.col.cell.unavailable {
-  background-color: grey;
+.unavailableMark {
+  font-size: x-small;
+  color: rgb(206, 63, 63);
+}
+.statistics {
+  line-height: 5em;
+}
+.nameFilter {
+  position: fixed;
+  top: 0;
+  right: 0;
 }

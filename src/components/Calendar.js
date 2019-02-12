@@ -58,22 +58,14 @@ const CalendarCells = ({
   while (day <= endDate) {
     for (let i = 0; i < 7; i += 1) {
       formattedDate = dateFns.format(day, dateFormat);
+      const cloneDay = day;
       const compositeDate = `${day.getFullYear()}-${(day.getMonth() + 1 < 10
         ? '0'
         : '')
         + (day.getMonth() + 1)}-${(day.getDate() < 10 ? '0' : '')
         + day.getDate()}`;
-      // console.log(
-      //   compositeDate + (unavailableDates.indexOf(compositeDate) !== -1),
-      // );
-      // console.log(unavailableDates);
 
       preferCount = preferDates[compositeDate];
-      // console.log(preferCount);
-      // console.log(compositeDate in preferDates);
-      // console.log(typeof unavailableDates);
-
-      const cloneDay = day;
 
       days.push(
         <div
@@ -91,13 +83,15 @@ const CalendarCells = ({
           key={day}
           onClick={() => onDateClick(dateFns.parse(cloneDay))}
         >
-          <span className="preferCount">
+          <div className="statistics">
             {preferCount ? '可以人數' : ''}
             {preferCount}
-            {unavailableDates.indexOf(compositeDate) !== -1
-              ? '（有人不行）'
-              : ''}
-          </span>
+            {unavailableDates.indexOf(compositeDate) !== -1 ? (
+              <span className="unavailableMark">（有人不行）</span>
+            ) : (
+              ''
+            )}
+          </div>
           <span className="number">{formattedDate}</span>
           <span className="bg">{formattedDate}</span>
         </div>,
@@ -114,14 +108,20 @@ const CalendarCells = ({
   return <div className="body">{rows}</div>;
 };
 
-const NameFilter = ({ names, setVisibilityFilter }) => (
-  <select onChange={e => setVisibilityFilter(e.target.value)}>
-    {names.map(name => (
-      <option key={name} value={name}>
-        {name}
-      </option>
-    ))}
-  </select>
+const NameFilter = ({ names, visibilityFilter, setVisibilityFilter }) => (
+  <div className="nameFilter">
+    <select
+      value={visibilityFilter}
+      onChange={e => setVisibilityFilter(e.target.value)}
+    >
+      <option value="ALL">顯示全部</option>
+      {names.map(name => (
+        <option key={name} value={name}>
+          {name}
+        </option>
+      ))}
+    </select>
+  </div>
 );
 
 class Calendar extends React.Component {
@@ -161,12 +161,17 @@ class Calendar extends React.Component {
       preferDates,
       unavailableDates,
       names,
+      visibilityFilter,
       setVisibilityFilter,
     } = this.props;
     const { currentMonth, selectedDate } = this.state;
     return (
       <React.Fragment>
-        <NameFilter names={names} setVisibilityFilter={setVisibilityFilter} />
+        <NameFilter
+          names={names}
+          visibilityFilter={visibilityFilter}
+          setVisibilityFilter={setVisibilityFilter}
+        />
         <div className="calendar">
           <CalendarHeader
             currentMonth={currentMonth}
@@ -184,10 +189,6 @@ class Calendar extends React.Component {
         </div>
         {JSON.stringify(plandate)}
         <hr />
-        {JSON.stringify(preferDates)}
-        {' '}
-        <br />
-        {/* {JSON.stringify(unavailableDates)} */}
       </React.Fragment>
     );
   }

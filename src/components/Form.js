@@ -3,12 +3,12 @@ import React from 'react';
 const mockData = [
   {
     name: 'Tiffany',
-    preferDate: '2019-02-18, 2019-02-17, 2019-02-28',
-    unavailableDate: '2019-02-12, 2019-02-14, 2019-02-27',
+    preferDate: '2019-02-10, 2019-02-18, 2019-02-17, 2019-02-28',
+    unavailableDate: '2019-02-27',
   },
   {
     name: 'Sara',
-    preferDate: '2019-02-18, 2019-02-17, 2019-02-28',
+    preferDate: '2019-02-18, 2019-02-17, 2019-02-27',
     unavailableDate: '2019-02-12, 2019-02-14, 2019-02-27',
   },
   {
@@ -19,7 +19,7 @@ const mockData = [
   {
     name: 'Jack',
     preferDate: '2019-02-17, 2019-02-28',
-    unavailableDate: '2019-02-12, 2019-02-14, 2019-02-27',
+    unavailableDate: '2019-02-12',
   },
   {
     name: 'Ben',
@@ -29,7 +29,7 @@ const mockData = [
   {
     name: 'Chole',
     preferDate: '2019-02-17, 2019-02-25',
-    unavailableDate: '2019-02-12, 2019-02-14, 2019-02-27',
+    unavailableDate: '2019-02-14, 2019-02-27',
   },
 ];
 class Form extends React.Component {

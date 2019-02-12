@@ -6,7 +6,6 @@ import plandate from './reducers';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-// const store = createStore(plandate);
 const store = createStore(
   plandate,
   // eslint-disable-next-line no-underscore-dangle

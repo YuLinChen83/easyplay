@@ -4,7 +4,7 @@ export const inputDate = () => ({
 
 export const onFormChange = formData => ({
   type: 'ON_FORM_CHANGE',
-  formData,
+  formData, // {name, value}
 });
 
 export const setVisibilityFilter = filter => ({
