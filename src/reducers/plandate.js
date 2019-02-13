@@ -135,6 +135,18 @@ const plandate = (state = initinalState, action) => {
       };
     case 'RESULT_DATA':
       ({ preferDate, unavailableDate } = prepareData(state.selectlist));
+      // console.log(
+      //   JSON.stringify({
+      //     ...state,
+      //     preferDates: preferDate.reduce((prev2, cur2) => {
+      //       // eslint-disable-next-line no-param-reassign
+      //       prev2[cur2] = (prev2[cur2] || 0) + 1;
+      //       // eslint-enable
+      //       return prev2;
+      //     }, {}),
+      //     unavailableDates: unavailableDate,
+      //   }),
+      // );
       return {
         ...state,
         preferDates: preferDate.reduce((prev2, cur2) => {

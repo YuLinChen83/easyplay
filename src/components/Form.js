@@ -96,10 +96,10 @@ class Form extends React.Component {
             }
           />
         </label>
-        <button type="submit" onClick={() => onSubmit()}>
+        <button type="submit" id="sumbit" onClick={() => onSubmit()}>
           提交
         </button>
-        <button type="button" onClick={() => onResult()}>
+        <button type="button" id="result" onClick={() => onResult()}>
           結果
         </button>
       </div>

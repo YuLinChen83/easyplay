@@ -7,14 +7,24 @@ const CalendarHeader = ({ currentMonth, prevMonth, nextMonth }) => {
   return (
     <div className="header row flex-middle">
       <div className="col col-start">
-        <div role="presentation" className="icon" onClick={prevMonth}>
+        <div
+          id="prevMonth"
+          role="presentation"
+          className="icon"
+          onClick={prevMonth}
+        >
           chevron_left
         </div>
       </div>
       <div className="col col-center">
         <span>{dateFns.format(currentMonth, dateFormat)}</span>
       </div>
-      <div role="presentation" className="col col-end" onClick={nextMonth}>
+      <div
+        id="nextMonth"
+        role="presentation"
+        className="col col-end"
+        onClick={nextMonth}
+      >
         <div className="icon">chevron_right</div>
       </div>
     </div>
@@ -108,9 +118,14 @@ const CalendarCells = ({
   return <div className="body">{rows}</div>;
 };
 
-const NameFilter = ({ names, visibilityFilter, setVisibilityFilter }) => (
+export const NameFilter = ({
+  names,
+  visibilityFilter,
+  setVisibilityFilter,
+}) => (
   <div className="nameFilter">
     <select
+      id="nameFilter"
       value={visibilityFilter}
       onChange={e => setVisibilityFilter(e.target.value)}
     >
