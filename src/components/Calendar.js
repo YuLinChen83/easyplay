@@ -173,12 +173,14 @@ class Calendar extends React.Component {
   render() {
     const {
       plandate,
-      preferDates,
-      unavailableDates,
+      filterData,
       names,
       visibilityFilter,
       setVisibilityFilter,
     } = this.props;
+    console.log(filterData);
+    const { preferDates, unavailableDates } = filterData;
+    console.log(preferDates, unavailableDates);
     const { currentMonth, selectedDate } = this.state;
     return (
       <React.Fragment>

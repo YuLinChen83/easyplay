@@ -5,35 +5,34 @@ const initinalState = {
     unavailableDate: '',
   },
   visibilityFilter: 'ALL', // ALL or Employee name
-  selectlist: [],
-  // [
-  //   {
-  //     name: 'Tiffany',
-  //     preferDate: ['2019-02-18', '2019-02-17', '2019-02-28'],
-  //     unavailableDate: ['2019-02-13', '2019-02-14', '2019-02-27'],
-  //   },
-  //   {
-  //     name: 'Sara',
-  //     preferDate: ['2019-02-15', '2019-02-17', '2019-02-28'],
-  //     unavailableDate: ['2019-02-13', '2019-02-14', '2019-02-27'],
-  //   },
-  //   {
-  //     name: 'Tyler',
-  //     preferDate: ['2019-02-15', '2019-02-17', '2019-02-28'],
-  //     unavailableDate: ['2019-02-13', '2019-02-14', '2019-02-27'],
-  //   },
-  //   {
-  //     name: 'Jack',
-  //     preferDate: [
-  //       '2019-02-15',
-  //       '2019-02-17',
-  //       '2019-02-26',
-  //       '2019-02-27',
-  //       '2019-02-28',
-  //     ],
-  //     unavailableDate: ['2019-02-13', '2019-02-14', '2019-02-27'],
-  //   },
-  // ]
+  selectlist: [
+    {
+      name: 'Tiffany',
+      preferDate: ['2019-02-18', '2019-02-17', '2019-02-28'],
+      unavailableDate: ['2019-02-13', '2019-02-14', '2019-02-27'],
+    },
+    {
+      name: 'Sara',
+      preferDate: ['2019-02-15', '2019-02-17', '2019-02-28'],
+      unavailableDate: ['2019-02-13', '2019-02-14', '2019-02-27'],
+    },
+    {
+      name: 'Tyler',
+      preferDate: ['2019-02-15', '2019-02-17', '2019-02-28'],
+      unavailableDate: ['2019-02-13', '2019-02-14', '2019-02-27'],
+    },
+    {
+      name: 'Jack',
+      preferDate: [
+        '2019-02-15',
+        '2019-02-17',
+        '2019-02-26',
+        '2019-02-27',
+        '2019-02-28',
+      ],
+      unavailableDate: ['2019-02-13', '2019-02-14', '2019-02-27'],
+    },
+  ],
   preferDates: {},
   unavailableDates: [],
 };
@@ -116,22 +115,22 @@ const plandate = (state = initinalState, action) => {
         },
       };
     case 'SET_VISIBILITY_FILTER':
-      newSelectlist = state.selectlist.filter(
-        item => item.name === action.filter,
-      );
-      ({ preferDate, unavailableDate } = prepareData(
-        action.filter === 'ALL' ? state.selectlist : newSelectlist,
-      ));
+      // newSelectlist = state.selectlist.filter(
+      //   item => item.name === action.filter,
+      // );
+      // ({ preferDate, unavailableDate } = prepareData(
+      //   action.filter === 'ALL' ? state.selectlist : newSelectlist,
+      // ));
       return {
         ...state,
         visibilityFilter: action.filter,
-        preferDates: preferDate.reduce((prev2, cur2) => {
-          // eslint-disable-next-line no-param-reassign
-          prev2[cur2] = (prev2[cur2] || 0) + 1;
-          // eslint-enable
-          return prev2;
-        }, {}),
-        unavailableDates: unavailableDate,
+        // preferDates: preferDate.reduce((prev2, cur2) => {
+        //   // eslint-disable-next-line no-param-reassign
+        //   prev2[cur2] = (prev2[cur2] || 0) + 1;
+        //   // eslint-enable
+        //   return prev2;
+        // }, {}),
+        // unavailableDates: unavailableDate,
       };
     case 'RESULT_DATA':
       ({ preferDate, unavailableDate } = prepareData(state.selectlist));
